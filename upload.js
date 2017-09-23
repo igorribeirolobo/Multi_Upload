@@ -1,13 +1,14 @@
 $(document).ready(function(){
     $('#btnEnviar').click(function(){
         $('#formUpload').ajaxForm({
-            uploadProgress: function(event, position, total, percentComplete) {
+            uploadProgress: function(percentComplete) {
                 $('progress').attr('value',percentComplete);
                 $('#porcentagem').html(percentComplete+'%');
             },        
             success: function(data) {
                 $('progress').attr('value','100');
-                $('#porcentagem').html('100%');                
+                $('#porcentagem').html('100%'); 
+                data.sucesso = true;
                 if(data.sucesso == true){
                     $('#resposta').html('<img src="'+ data.msg +'" />');
                 }
@@ -15,9 +16,7 @@ $(document).ready(function(){
                     $('#resposta').html(data.msg);
                 }                
             },
-            error : function(){
-                $('#resposta').html('Erro ao enviar requisição!!!');
-            },
+            
             dataType: 'json',
             url: 'index.php',
             resetForm: true

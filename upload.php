@@ -2,11 +2,12 @@
 
 class Upload {
 
-    private $target_dir = "uploads/";
+    private $target_dir = "../midias/produtos/fotos";
     private $verifica = true;
     private $name = array();
     private $tmp_name = array();
     private $size = array();
+    private $resultado = 0;
 //$name -> recebe o nome do input  $tipo -> recebe o dado que deseja retorno
     public function busca($name, $tipo) {
         $i = 0;
@@ -24,6 +25,16 @@ class Upload {
                 $i++;
             }
         }
+    }
+    public function getResultado()
+    {
+        return $this->resultado;
+    }
+    public function porcent($valorAtual, $valorTotal)
+    {
+        $this->resultado = (($valorAtual + 1) * 100) / $valorTotal;
+        
+        
     }
 //$pos -> recebe a posição do vetor onde esta armazenado os dados do upload
     public function subir($pos) {
